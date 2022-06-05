@@ -1,38 +1,11 @@
 # Import libraries
-from fastapi import Depends, FastAPI
-from fastapi_utils.cbv import cbv
-from fastapi_utils.inferring_router import InferringRouter
-# from classes.DaftarFavorit import
-# from classes.DaftarHitam import
-# from classes.Histori import 
-from koleksisaya.main import KoleksiSaya
-from koleksifavorit.main import DaftarFavorit
-from daftarhitam.main import DaftarHitam
-# from classes.Resto import
-# from classes.Review import 
-# from classes.User import
+from fastapi import FastAPI
+from database import engine
+from routers import daftarhitam, koleksifavorit, models
 
-# Initiate app and router
 app = FastAPI()
-router = InferringRouter()
+models.Base.metadata.create_all(engine)
 
-@cbv(router)
-class App:
-    DH = DaftarHitam(1, "Foo", 15.40, '11/11/2021')
-    DF = DaftarFavorit(1, "Bar", 8.40, '05/03/2018')
-    
-    
-    list_hitam = Depends(DH.getAll())
-    @router.get("/profil-daftarhitam")
-    def getDaftarHitam(self):
-        return self.list_hitam
-
-    list_favorit = Depends(DF.getAll())
-    @router.get("/profil-koleksifavorit")
-    def getDaftarFavorit(self):
-        return self.list_favorit
-
-    
-
-app.include_router(router)
+app.include_router(daftarhitam.router)
+app.include_router(koleksifavorit.router)
 
