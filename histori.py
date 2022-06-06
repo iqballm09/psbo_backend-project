@@ -7,6 +7,6 @@ class Histori():
 	def getId(self):
 		return self.id 
 	def getJam(self):
-        return self.jam
-    def getTanggal(self):
-        return self.tanggal
+		return self.jam
+	def getTanggal(self):
+		return self.tanggal
