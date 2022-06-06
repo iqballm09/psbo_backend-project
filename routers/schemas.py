@@ -9,3 +9,7 @@ class DaftarHitam(BaseModel):
     status: str
     jam: str
     tanggal: str
+
+class Histori(BaseModel):
+    jam: str
+    tanggal: str

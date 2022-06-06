@@ -14,3 +14,9 @@ class DaftarHitam(Base):
     status = Column(String)
     jam = Column(String)
     tanggal = Column(String)
+
+class Histori(Base):
+    __tablename__ = 'Histori'
+    id = Column(Integer, primary_key=True, index=True)
+    jam = Column(String)
+    tanggal = Column(String)
