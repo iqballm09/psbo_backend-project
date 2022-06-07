@@ -19,6 +19,7 @@
 ### Use Case Diagram
 ![Use Case Projek](https://user-images.githubusercontent.com/78842271/172203583-c124f87b-d09e-4f21-8cf2-5a2341e7d266.png)
 ### Class Diagram
+![Use Case Projek](file:///C:/Users/user/OneDrive/Miscellaneous/Pictures/Saved%20Pictures/Tingkat%203/Class%20Diagram%20PSBO%20Project.png)
 ### Activity Diagram
 ### Entity Relationship Diagram
 ### Arsitektur Sistem
