@@ -46,6 +46,6 @@ class DaftarHitam(KoleksiSaya):
         if not koleksi:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"Restoran dengan id = {id} sudah tidak ada di Daftar Hitam")           
-        return "Restoran dengan sudah dihapus dari Daftar Hitam"
+        return "Restoran sudah dihapus dari Daftar Hitam"
 
 app.include_router(router)
