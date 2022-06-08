@@ -26,16 +26,16 @@ class KoleksiFavorit(KoleksiSaya):
 
     ## Read
     @router.get('/profile/koleksi-favorit')
-    def all(self):
+    def show_all(self):
         list_koleksi = self.session.query(models.KoleksiFavorit).all()
         return list_koleksi    
     
     @router.get('/profile/koleksi-favorit/{id}', status_code=status.HTTP_200_OK)
-    def show(self, id):
+    def show_by_id(self, id):
         koleksi = self.session.query(models.KoleksiFavorit).filter(models.KoleksiFavorit.id == id).first()
         if not koleksi:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                                detail=f"Restoran dengan id {id} tidak ada di Koleksi Favorit")
+                                detail=f"Restoran dengan id = {id} tidak ada di Koleksi Favorit")
         return koleksi
 
     ## Delete
@@ -46,6 +46,6 @@ class KoleksiFavorit(KoleksiSaya):
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"Restoran dengan id = {id} sudah tidak ada di Koleksi Favorit")  
         self.session.commit()
-        return "Restoran sudah dihapus dari Koleksi Favorit"
+        return f"Restoran sudah dihapus dari Koleksi Favorit"
 
 app.include_router(router)

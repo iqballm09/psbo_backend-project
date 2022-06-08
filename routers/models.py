@@ -30,13 +30,6 @@ class DaftarHitam(KoleksiSaya):
         "concrete": True,
     }
 
-
-
-
-
-
-
-
 class Histori(Base):
     __tablename__ = 'Histori'
     id = Column(Integer, primary_key=True, index=True)

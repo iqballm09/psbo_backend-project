@@ -11,11 +11,6 @@ class KoleksiFavorit(KoleksiSaya, BaseModel):
 class DaftarHitam(KoleksiSaya, BaseModel):
     pass
 
-
-
-
-
-
 class Histori(BaseModel):
     jam: str
     tanggal: str

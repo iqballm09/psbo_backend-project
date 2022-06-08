@@ -26,12 +26,12 @@ class DaftarHitam(KoleksiSaya):
 
     ## Read
     @router.get('/profile/daftar-hitam')
-    def all(self):
+    def show_all(self):
         list_koleksi = self.session.query(models.DaftarHitam).all()
         return list_koleksi    
     
     @router.get('/profile/daftar-hitam/{id}', status_code=status.HTTP_200_OK)
-    def show(self, id):
+    def show_by_id(self, id):
         koleksi = self.session.query(models.DaftarHitam).filter(models.DaftarHitam.id == id).first()
         if not koleksi:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
