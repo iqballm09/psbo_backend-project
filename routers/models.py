@@ -46,4 +46,4 @@ class Review(Base):
     jam = Column(String)
     tanggal = Column(String)
     upvotes = Column(Integer)
-    downvotes = Column(String) 
+    downvotes = Column(Integer) 

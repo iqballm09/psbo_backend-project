@@ -1,7 +1,6 @@
 # Import libraries
 from requests import Session
 from . import models, schemas
-from .koleksisaya import KoleksiSaya
 from database import engine, get_db
 from fastapi import Depends, FastAPI, status, HTTPException
 from fastapi_utils.cbv import cbv
