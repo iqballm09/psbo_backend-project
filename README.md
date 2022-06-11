@@ -1,9 +1,9 @@
 # <div align="center"> Laporan Akhir Tugas Project PSBO </div>
-# <div align="center"> Nama Aplikasi </div>
+# <div align="center"> EzEats </div>
 ## <div align="center"> (P2 | Kelompok 1) </div>
 
 ## Deskripsi Singkat Aplikasi
-
+EzEats adalah aplikasi berbasis web yang diharapkan dapat membantu masyarakat, khususnya foodhunter untuk saling berinteraksi satu sama lain dengan bertukar informasi mengenai penilaian ataupun ulasan terhadap sebuah rumah makan.
 ## User Story
 
 ## Spesifikasi Teknis Lingkungan Pengembangan
