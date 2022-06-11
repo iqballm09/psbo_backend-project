@@ -32,5 +32,12 @@ EzEats adalah aplikasi berbasis web yang diharapkan dapat membantu masyarakat, k
 ## Saran
 
 ## Developer dan Job Desc
+| NIM | Nama |
+| -------- | ------- |
+| G64190025 | Lee Roy Akbar |
+| G64190046 | Tri Aji Handayani |
+| G64190053 | Antonius Anre Sianturi |
+| G64190057 | Muammar Naufal Pramudya |
+| G64190074 | M. Iqbal |
 
 ## Link
