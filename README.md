@@ -6,15 +6,15 @@
 EzEats adalah aplikasi berbasis web yang diharapkan dapat membantu masyarakat, khususnya foodhunter untuk saling berinteraksi satu sama lain dengan bertukar informasi mengenai penilaian ataupun ulasan terhadap sebuah rumah makan.
 
 ## User Story
--Sebagai pengguna yang ingin menggunakan aplikasi, agar dapat terdaftar dalam aplikasi dan dapat menggunakan seluruh fitur yang tersedia, saya dapat melakukan registrasi dengan mencantumkan nama, alamat surel, dan kata sandi baru
--Sebagai pengguna yang ingin mencari rumah makan, menu masakan, serta lokasi tempat makan, saya dapat memanfaatkan search bar yang ada pada halaman utama aplikasi
--Sebagai pengguna yang telah terdaftar dan ingin ikut berkontribusi untuk mengembangkan database aplikasi, saya dapat menambah entri rumah makan beserta info seputar rumah makan yang bersangkutan
--Sebagai pengguna yang telah terdaftar dan ingin menginfokan suatu rumah makan kepada pengguna lain, saya dapat memberikan penilaian berupa rating dan ulasan berupa komentar terhadap suatu rumah makan
--Sebagai pengguna yang sedang mencari referensi rumah makan, saya dapat melihat berbagai menu dan galeri penampakan interior rumah makan pada detil entri rumah makan
--Sebagai pengguna terdaftar yang ingin menyimpan daftar rumah makan favorit maupun rumah makan yang dihindari, saya dapat menambahkan kedua daftar tersebut pada info profil saya
--Sebagai pengguna yang ingin mencari rumah makan dengan kategori-kategori tertentu, saya menginginkan adanya fitur yang dapat memfilter hasil pencarian
--Sebagai pengguna yang ingin memesan makanan atau mereservasi tempat di rumah makan, saya dapat menghubungi pihak rumah makan melalui kontak yang tercantum pada detail entri rumah makan
--Sebagai pengguna terdaftar yang ingin memberikan tanggapan terhadap ulasan dari pengguna lain, saya dapat menilai apakah ulasan dari pengguna lain tersebut membantu atau tidak
+- Sebagai pengguna yang ingin menggunakan aplikasi, agar dapat terdaftar dalam aplikasi dan dapat menggunakan seluruh fitur yang tersedia, saya dapat melakukan registrasi dengan mencantumkan nama, alamat surel, dan kata sandi baru
+- Sebagai pengguna yang ingin mencari rumah makan, menu masakan, serta lokasi tempat makan, saya dapat memanfaatkan search bar yang ada pada halaman utama aplikasi
+- Sebagai pengguna yang telah terdaftar dan ingin ikut berkontribusi untuk mengembangkan database aplikasi, saya dapat menambah entri rumah makan beserta info seputar rumah makan yang bersangkutan
+- Sebagai pengguna yang telah terdaftar dan ingin menginfokan suatu rumah makan kepada pengguna lain, saya dapat memberikan penilaian berupa rating dan ulasan berupa komentar terhadap suatu rumah makan
+- Sebagai pengguna yang sedang mencari referensi rumah makan, saya dapat melihat berbagai menu dan galeri penampakan interior rumah makan pada detil entri rumah makan
+- Sebagai pengguna terdaftar yang ingin menyimpan daftar rumah makan favorit maupun rumah makan yang dihindari, saya dapat menambahkan kedua daftar tersebut pada info profil saya
+- Sebagai pengguna yang ingin mencari rumah makan dengan kategori-kategori tertentu, saya menginginkan adanya fitur yang dapat memfilter hasil pencarian
+- Sebagai pengguna yang ingin memesan makanan atau mereservasi tempat di rumah makan, saya dapat menghubungi pihak rumah makan melalui kontak yang tercantum pada detail entri rumah makan
+- Sebagai pengguna terdaftar yang ingin memberikan tanggapan terhadap ulasan dari pengguna lain, saya dapat menilai apakah ulasan dari pengguna lain tersebut membantu atau tidak
 
 
 ## Spesifikasi Teknis Lingkungan Pengembangan
