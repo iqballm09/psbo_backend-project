@@ -70,3 +70,15 @@ class Resto(Base):
     no_telp = Column(String)
     upvotes = Column(Integer)
     downvotes = Column(Integer)
+    
+class User(Base):
+    __tablename__ = 'User'
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String)
+    nama = Column(String)
+    deskripsi_singkat = Column(String)
+    password = Column(String)
+    no_telp = Column(String)
+    alamat = Column(String)
+    gambar = Column(String)
+    cover = Column(String)
