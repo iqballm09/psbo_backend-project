@@ -45,3 +45,13 @@ class Resto(BaseModel):
     no_telp: str
     upvotes: int
     downvotes: int
+
+class User(BaseModel):
+	email: str
+	nama: str
+	deskripsi_singkat: str 
+	password: str
+	no_telp: str
+	alamat: str
+	gambar: str
+	cover: str
