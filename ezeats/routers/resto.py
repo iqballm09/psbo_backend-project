@@ -23,7 +23,7 @@ class Resto:
         new_item = models.Resto(nama = item.nama ,
                                 kategori = item.kategori ,
                                 harga = item.harga ,
-                                user_id = 1,
+                                user_id = current_user.id,
                                 jam_buka = item.jam_buka ,
                                 jam_tutup = item.jam_tutup ,
                                 fasilitas = item.fasilitas ,
