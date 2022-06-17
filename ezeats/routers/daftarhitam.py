@@ -1,23 +1,24 @@
 # Import libraries
 from requests import Session
-from ezeats import models, schemas
+from .. import models, schemas, cbv
 from .koleksisaya import KoleksiSaya
-from ezeats.database import engine, get_db
-from fastapi import Depends, FastAPI, status, HTTPException
-from fastapi_utils.cbv import cbv
-from fastapi_utils.inferring_router import InferringRouter
+from .. database import engine, get_db
+from fastapi import Depends, FastAPI, status, HTTPException, APIRouter
 
 # Initiate app and router
 app = FastAPI()
-router = InferringRouter()
+router = APIRouter(
+    prefix="/daftar-hitam",
+    tags=["Daftar Hitam"]
+)
 models.Base.metadata.create_all(engine)
 
-@cbv(router)
+@cbv.cbv(router)
 class DaftarHitam(KoleksiSaya):
     session: Session = Depends(get_db)
 
     ## Create
-    @router.post("/profile/daftar-hitam", status_code=status.HTTP_201_CREATED, tags=['daftar hitam'])
+    @router.post("/", status_code=status.HTTP_201_CREATED)
     def create(self, item: schemas.DaftarHitam):
         new_item = models.DaftarHitam(status=item.status, jam=item.jam, tanggal=item.tanggal)
         self.session.add(new_item)
@@ -25,12 +26,12 @@ class DaftarHitam(KoleksiSaya):
         return f"Restoran sudah ditambahkan ke Daftar Hitam"
 
     ## Read
-    @router.get('/profile/daftar-hitam', tags=['daftar hitam'])
+    @router.get("/")
     def show_all(self):
         list_koleksi = self.session.query(models.DaftarHitam).all()
         return list_koleksi    
     
-    @router.get('/profile/daftar-hitam/{id}', status_code=status.HTTP_200_OK, tags=['daftar hitam'])
+    @router.get('/{id}', status_code=status.HTTP_200_OK)
     def show_by_id(self, id):
         koleksi = self.session.query(models.DaftarHitam).filter(models.DaftarHitam.id == id).first()
         if not koleksi:
@@ -39,7 +40,7 @@ class DaftarHitam(KoleksiSaya):
         return koleksi
 
     ## Delete
-    @router.delete('/profile/daftar-hitam/{id}', status_code=status.HTTP_204_NO_CONTENT, tags=['daftar hitam'])
+    @router.delete('/{id}', status_code=status.HTTP_204_NO_CONTENT)
     def destroy(self, id):
         koleksi = self.session.query(models.DaftarHitam).filter(models.DaftarHitam.id == id).delete(synchronize_session=False)
         self.session.commit()

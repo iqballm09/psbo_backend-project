@@ -1,22 +1,23 @@
 # Import libraries
 from requests import Session
-from ezeats import models, schemas
-from ezeats.database import engine, get_db
-from fastapi import Depends, FastAPI, status, HTTPException
-from fastapi_utils.cbv import cbv
-from fastapi_utils.inferring_router import InferringRouter
+from .. import models, schemas, cbv
+from .. database import engine, get_db
+from fastapi import Depends, FastAPI, status, HTTPException, APIRouter
 
 # Initiate app and router
 app = FastAPI()
-router = InferringRouter()
+router = APIRouter(
+    tags=["Reviews"],
+    prefix="/review"
+)
 models.Base.metadata.create_all(engine)
 
-@cbv(router)
+@cbv.cbv(router)
 class Review:
     session: Session = Depends(get_db)
 
     ## Create
-    @router.post("/profile/review", status_code=status.HTTP_201_CREATED, tags=['reviews'])
+    @router.post("/", status_code=status.HTTP_201_CREATED)
     def create(self, item: schemas.Review):
         new_review = models.Review(judul = item.judul, ulasan = item.ulasan, gambar = item.gambar, 
                                     rekomendasi = item.rekomendasi, jam = item.jam, tanggal = item.tanggal, 
@@ -26,12 +27,12 @@ class Review:
         return f"Review sudah ditambahkan"
 
     ## Read
-    @router.get('/profile/review', tags=['reviews'])
+    @router.get('/')
     def show_all(self):
         list_review = self.session.query(models.Review).all()
         return list_review    
     
-    @router.get('/profile/review/{id}', status_code=status.HTTP_200_OK, tags=['reviews'])
+    @router.get('/{id}', status_code=status.HTTP_200_OK)
     def show_by_id(self, id):
         review = self.session.query(models.Review).filter(models.Review.id == id).first()
         if not review:
@@ -40,7 +41,7 @@ class Review:
         return review
 
     ## Update
-    @router.put('/profile/review/{id}', status_code=status.HTTP_202_ACCEPTED, tags=['reviews'])
+    @router.put('/{id}', status_code=status.HTTP_202_ACCEPTED)
     def update(self, id, request: schemas.Review):
         review = self.session.query(models.Review).filter(models.Review.id == id).first()
         if not review:
@@ -52,7 +53,7 @@ class Review:
         return 'updated!'        
 
     ## Delete
-    @router.delete('/profile/review/{id}', status_code=status.HTTP_204_NO_CONTENT, tags=['reviews'])
+    @router.delete('/{id}', status_code=status.HTTP_204_NO_CONTENT)
     def destroy(self, id):
         koleksi = self.session.query(models.Review).filter(models.Review.id == id).delete(synchronize_session=False)
         if not koleksi:

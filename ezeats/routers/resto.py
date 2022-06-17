@@ -1,25 +1,25 @@
 # Import libraries
-from typing import List
-from ezeats import schemas, models
-from ezeats.database import get_db, engine
+from .. import schemas, models, oauth2, cbv
+from .. database import get_db, engine
 from sqlalchemy.orm import Session
-from fastapi import Depends, status, HTTPException, FastAPI
-from fastapi_utils.cbv import cbv
-from fastapi_utils.inferring_router import InferringRouter
+from fastapi import Depends, FastAPI, status, HTTPException, APIRouter
 
 # Initiate app and router
 app = FastAPI()
-router = InferringRouter()
+router = APIRouter(
+    prefix="/resto",
+    tags=["Resto"]
+)
 models.Base.metadata.create_all(engine)
 
 
-@cbv(router)
+@cbv.cbv(router)
 class Resto:
     session: Session = Depends(get_db)
     
     ## Create
-    @router.post("/resto", status_code=status.HTTP_201_CREATED, tags=['resto'])
-    def create(self, item: schemas.Resto):
+    @router.post("/", status_code=status.HTTP_201_CREATED)
+    def create(self, item: schemas.Resto, current_user: schemas.User=Depends(oauth2.get_current_user)):
         new_item = models.Resto(nama = item.nama ,
                                 kategori = item.kategori ,
                                 harga = item.harga ,
@@ -43,13 +43,13 @@ class Resto:
         return new_item
 
     ## Read
-    @router.get('/resto',tags=['resto'])
-    def show_all(self):
+    @router.get('/')
+    def show_all(self, current_user: schemas.User=Depends(oauth2.get_current_user)):
         list_resto = self.session.query(models.Resto).all()
         return list_resto    
     
-    @router.get('/resto/{id}', status_code=status.HTTP_200_OK, tags=['resto'])
-    def show_by_id(self, id):
+    @router.get('/{id}', status_code=status.HTTP_200_OK)
+    def show_by_id(self, id, current_user: schemas.User=Depends(oauth2.get_current_user)):
         resto = self.session.query(models.Resto).filter(models.Resto.id == id).first()
         if not resto:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -57,8 +57,8 @@ class Resto:
         return resto
 
     ## Update
-    @router.put('/resto/{id}', status_code=status.HTTP_202_ACCEPTED, tags=['resto'])
-    def update(self, id, request: schemas.Resto):
+    @router.put('/{id}', status_code=status.HTTP_202_ACCEPTED)
+    def update(self, id, request: schemas.Resto, current_user: schemas.User=Depends(oauth2.get_current_user)):
         resto = self.session.query(models.Resto).filter(models.Resto.id == id).first()
         if not resto:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, 
@@ -69,7 +69,7 @@ class Resto:
         return resto   
 
     ## Delete
-    @router.delete('/resto/{id}', status_code=status.HTTP_204_NO_CONTENT, tags=['resto'])
+    @router.delete('/{id}', status_code=status.HTTP_204_NO_CONTENT)
     def destroy(self, id):
         resto = self.session.query(models.Resto).filter(models.Resto.id == id).delete(synchronize_session=False)
         self.session.commit()

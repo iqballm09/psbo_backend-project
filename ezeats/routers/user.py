@@ -1,39 +1,39 @@
 # Import libraries
-from typing import List
 from requests import Session
-from ezeats import models, schemas, hashing
-from ezeats.database import engine, get_db
-from fastapi import Depends, FastAPI, status, HTTPException
-from fastapi_utils.cbv import cbv
-from fastapi_utils.inferring_router import InferringRouter
+from .. import models, schemas, hashing, cbv
+from .. database import engine, get_db
+from fastapi import Depends, FastAPI, status, HTTPException, APIRouter
 
 # Initiate app and router
 app = FastAPI()
-router = InferringRouter()
+router = APIRouter(
+    tags=["Users"],
+    prefix="/user"
+)
 models.Base.metadata.create_all(engine)
 
-@cbv(router)
+@cbv.cbv(router)
 class User:
     session: Session = Depends(get_db)
     
     ## Create
-    @router.post("/user", status_code=status.HTTP_201_CREATED, tags=['users'])
-    def create(self, item: schemas.User):
+    @router.post("/", status_code=status.HTTP_201_CREATED)
+    def create(self,item: schemas.User):
         new_user = models.User(email = item.email, nama = item.nama, deskripsi_singkat = item.deskripsi_singkat, 
-                                    password = hashing.Hash.bcrypt(item.password), no_telp = item.no_telp, alamat = item.alamat, 
-                                    gambar = item.gambar, cover = item.cover)
+                                password = hashing.Hash.bcrypt(item.password), no_telp = item.no_telp, alamat = item.alamat, 
+                                gambar = item.gambar, cover = item.cover)
         self.session.add(new_user)
         self.session.commit()
         self.session.refresh(new_user)
         return new_user
 
     ## Read
-    @router.get('/user',tags=['users'])
+    @router.get('/')
     def show_all(self):
         list_user = self.session.query(models.User).all()
         return list_user    
     
-    @router.get('/profile/user/{id}',status_code=status.HTTP_200_OK, tags=['users'])
+    @router.get('/{id}',status_code=status.HTTP_200_OK)
     def show_by_id(self, id):
         user = self.session.query(models.User).filter(models.User.id == id).first()
         if not user:
@@ -42,7 +42,7 @@ class User:
         return user
 
     ## Update
-    @router.put('/profile/user/{id}', status_code=status.HTTP_202_ACCEPTED, tags=['users'])
+    @router.put('/{id}', status_code=status.HTTP_202_ACCEPTED)
     def update(self, id, request: schemas.User):
         user = self.session.query(models.User).filter(models.User.id == id).first()
         if not user:
@@ -54,7 +54,7 @@ class User:
         return user
 
     ## Delete
-    @router.delete('/user/{id}', status_code=status.HTTP_204_NO_CONTENT, tags=['users'])
+    @router.delete('/{id}', status_code=status.HTTP_204_NO_CONTENT)
     def destroy(self, id):
         koleksi = self.session.query(models.User).filter(models.User.id == id).delete(synchronize_session=False)
         if not koleksi:
