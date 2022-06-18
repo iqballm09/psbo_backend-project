@@ -45,8 +45,7 @@ class Resto(BaseModel):
     foto_resto: str
     no_telp: str
     upvotes: int
-    downvotes: int
-    tes : int   
+    downvotes: int 
 
 class UserOut(BaseModel):
     email: str
