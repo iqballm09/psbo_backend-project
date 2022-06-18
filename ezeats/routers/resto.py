@@ -22,8 +22,7 @@ class Resto:
     def create(self, item: schemas.Resto):
         new_item = models.Resto(nama = item.nama ,
                                 kategori = item.kategori ,
-                                harga = item.harga ,
-                                user_id = 1,
+                                harga = item.harga
                                 jam_buka = item.jam_buka ,
                                 jam_tutup = item.jam_tutup ,
                                 fasilitas = item.fasilitas ,
@@ -40,7 +39,7 @@ class Resto:
                                 no_telp = item.no_telp )
         self.session.add(new_item)
         self.session.commit()          
-        return new_item
+        return f'Resto berhasil ditambahkan'
 
     ## Read
     @router.get('/')
