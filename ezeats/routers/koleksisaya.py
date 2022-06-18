@@ -1,12 +1,8 @@
 # Import libraries
-from requests import Session
 from ezeats import models, schemas
-from ezeats.routers.koleksisaya import KoleksiSaya
-from ezeats.database import engine, get_db
-from fastapi import Depends, FastAPI, status, HTTPException, APIRouter
+from fastapi import status, HTTPException
 
-class KoleksiFavorit(KoleksiSaya):
-    session: Session = Depends(get_db)
+class KoleksiSaya:
 
     ## Create
     def create(self, item: schemas.KoleksiSaya):
