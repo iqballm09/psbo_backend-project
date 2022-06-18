@@ -19,7 +19,7 @@ class Review:
     ## Create
     @router.post("/", status_code=status.HTTP_201_CREATED)
     def create(self, item: schemas.Review):
-        new_review = models.Review(judul = item.judul, ulasan = item.ulasan, gambar = item.gambar, 
+        new_review = models.Review(judul = item.judul, user_id=1, resto_id=1, ulasan = item.ulasan, gambar = item.gambar, 
                                     rekomendasi = item.rekomendasi, jam = item.jam, tanggal = item.tanggal, 
                                     upvotes = item.upvotes, downvotes = item.downvotes)
         self.session.add(new_review)

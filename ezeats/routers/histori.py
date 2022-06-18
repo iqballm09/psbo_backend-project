@@ -19,7 +19,7 @@ class Histori:
     ## Create
     @router.post("/", status_code=status.HTTP_201_CREATED)
     def create(self, item: schemas.Histori):
-        new_histori = models.Histori(jam=item.jam, tanggal=item.tanggal)
+        new_histori = models.Histori(jam=item.jam, user_id=1, resto_id=1, tanggal=item.tanggal)
         self.session.add(new_histori)
         self.session.commit()
         return f"Restoran sudah ditambahkan ke Histori"

@@ -60,7 +60,7 @@ class User:
         if not koleksi:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"Tidak ada User dengan id = {id}")
-        self.session.commit(synchronize_session=False)
+        self.session.commit()
         return f"User sudah dihapus dari List User"
 
 app.include_router(router)

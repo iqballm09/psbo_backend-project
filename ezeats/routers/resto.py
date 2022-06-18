@@ -1,5 +1,5 @@
 # Import libraries
-from .. import schemas, models, oauth2, cbv
+from .. import schemas, models, cbv
 from .. database import get_db, engine
 from sqlalchemy.orm import Session
 from fastapi import Depends, FastAPI, status, HTTPException, APIRouter
@@ -19,11 +19,11 @@ class Resto:
     
     ## Create
     @router.post("/", status_code=status.HTTP_201_CREATED)
-    def create(self, item: schemas.Resto, current_user: schemas.User=Depends(oauth2.get_current_user)):
+    def create(self, item: schemas.Resto):
         new_item = models.Resto(nama = item.nama ,
                                 kategori = item.kategori ,
                                 harga = item.harga ,
-                                user_id = current_user.id,
+                                user_id = 1,
                                 jam_buka = item.jam_buka ,
                                 jam_tutup = item.jam_tutup ,
                                 fasilitas = item.fasilitas ,
@@ -44,12 +44,12 @@ class Resto:
 
     ## Read
     @router.get('/')
-    def show_all(self, current_user: schemas.User=Depends(oauth2.get_current_user)):
+    def show_all(self):
         list_resto = self.session.query(models.Resto).all()
         return list_resto    
     
     @router.get('/{id}', status_code=status.HTTP_200_OK)
-    def show_by_id(self, id, current_user: schemas.User=Depends(oauth2.get_current_user)):
+    def show_by_id(self, id):
         resto = self.session.query(models.Resto).filter(models.Resto.id == id).first()
         if not resto:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -58,7 +58,7 @@ class Resto:
 
     ## Update
     @router.put('/{id}', status_code=status.HTTP_202_ACCEPTED)
-    def update(self, id, request: schemas.Resto, current_user: schemas.User=Depends(oauth2.get_current_user)):
+    def update(self, id, request: schemas.Resto):
         resto = self.session.query(models.Resto).filter(models.Resto.id == id).first()
         if not resto:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, 

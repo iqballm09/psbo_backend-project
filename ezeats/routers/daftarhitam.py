@@ -20,7 +20,7 @@ class DaftarHitam(KoleksiSaya):
     ## Create
     @router.post("/", status_code=status.HTTP_201_CREATED)
     def create(self, item: schemas.DaftarHitam):
-        new_item = models.DaftarHitam(status=item.status, jam=item.jam, tanggal=item.tanggal)
+        new_item = models.DaftarHitam(user_id=1, resto_id=1, status=item.status, jam=item.jam, tanggal=item.tanggal)
         self.session.add(new_item)
         self.session.commit()          
         return f"Restoran sudah ditambahkan ke Daftar Hitam"

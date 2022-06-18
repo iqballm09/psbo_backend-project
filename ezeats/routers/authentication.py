@@ -15,7 +15,7 @@ class Login:
     session: Session = Depends(database.get_db)
 
     @router.post('/login')
-    def login(self, request: OAuth2PasswordRequestForm = Depends()):
+    def login(self, request: schemas.Login):
         user = self.session.query(models.User).filter(models.User.email == request.username).first()
         if not user:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
