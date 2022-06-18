@@ -1,7 +1,7 @@
 # Import libraries
 from requests import Session
-from .. import models, schemas, cbv
-from .. database import engine, get_db
+from ezeats import models, schemas, cbv
+from ezeats.database import engine, get_db
 from fastapi import Depends, FastAPI, status, HTTPException, APIRouter
 
 # Initiate app and router

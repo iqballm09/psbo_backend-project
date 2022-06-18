@@ -1,8 +1,8 @@
 # Import libraries
 from requests import Session
-from .. import models, schemas, cbv
-from .koleksisaya import KoleksiSaya
-from .. database import engine, get_db
+from ezeats import models, schemas, cbv
+from ezeats.routers.koleksisaya import KoleksiSaya
+from ezeats.database import engine, get_db
 from fastapi import Depends, FastAPI, status, HTTPException, APIRouter
 
 # Initiate app and router

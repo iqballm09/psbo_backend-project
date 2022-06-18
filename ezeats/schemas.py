@@ -45,17 +45,25 @@ class Resto(BaseModel):
     foto_resto: str
     no_telp: str
     upvotes: int
-    downvotes: int   
+    downvotes: int
+    tes : int   
 
-class User(BaseModel):
-	email: str
-	nama: str
-	deskripsi_singkat: str 
-	password: str
-	no_telp: str
-	alamat: str
-	gambar: str
-	cover: str
+class UserOut(BaseModel):
+    email: str
+    nama: str
+    deskripsi_singkat:str
+    no_telp: str
+    alamat: str
+    gambar: str
+    cover: str
+    class Config():
+        orm_mode=True
+
+class User(UserOut):
+    password: str
+    class Config():
+        orm_mode=True
+    
 
 class Login(BaseModel):
     username: str

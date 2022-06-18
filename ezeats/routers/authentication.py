@@ -1,7 +1,7 @@
 from fastapi import FastAPI, APIRouter, Depends, status, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from ezeats.token import ACCESS_TOKEN_EXPIRE_MINUTES
-from .. import schemas, models, database, hashing, token, cbv
+from ezeats import schemas, models, database, hashing, token, cbv
 from sqlalchemy.orm import Session
 
 app = FastAPI()

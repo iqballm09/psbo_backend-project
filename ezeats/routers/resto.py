@@ -1,6 +1,6 @@
 # Import libraries
-from .. import schemas, models, cbv
-from .. database import get_db, engine
+from ezeats import schemas, models, cbv
+from ezeats.database import get_db, engine
 from sqlalchemy.orm import Session
 from fastapi import Depends, FastAPI, status, HTTPException, APIRouter
 

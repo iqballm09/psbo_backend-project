@@ -1,8 +1,9 @@
 # Import libraries
 from requests import Session
-from .. import models, schemas, hashing, cbv
-from .. database import engine, get_db
+from ezeats import models, schemas, hashing, cbv
+from ezeats.database import engine, get_db
 from fastapi import Depends, FastAPI, status, HTTPException, APIRouter
+from typing import List
 
 # Initiate app and router
 app = FastAPI()
@@ -17,7 +18,7 @@ class User:
     session: Session = Depends(get_db)
     
     ## Create
-    @router.post("/", status_code=status.HTTP_201_CREATED)
+    @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)
     def create(self,item: schemas.User):
         new_user = models.User(email = item.email, nama = item.nama, deskripsi_singkat = item.deskripsi_singkat, 
                                 password = hashing.Hash.bcrypt(item.password), no_telp = item.no_telp, alamat = item.alamat, 
@@ -28,12 +29,12 @@ class User:
         return new_user
 
     ## Read
-    @router.get('/')
+    @router.get('/', response_model=List[schemas.UserOut])
     def show_all(self):
         list_user = self.session.query(models.User).all()
         return list_user    
     
-    @router.get('/{id}',status_code=status.HTTP_200_OK)
+    @router.get('/{id}',status_code=status.HTTP_200_OK,response_model=schemas.UserOut)
     def show_by_id(self, id):
         user = self.session.query(models.User).filter(models.User.id == id).first()
         if not user:
